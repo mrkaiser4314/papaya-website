@@ -1,9 +1,5 @@
-// Configuración de la API - IMPORTANTE: URL de Railway
+// Configuración de la API
 const API_URL = 'https://papayas-api-production.up.railway.app/api';
-
-// NOTA: El dominio de Vercel cambió pero la API sigue en Railway
-// Web: https://mctierz-website-j5ua-3hs63ky54-magisk-mrkaisers-projects.vercel.app/
-// API: https://web-production-8abc3.up.railway.app/api
 
 let currentMode = 'overall';
 let allPlayers = {};
@@ -16,27 +12,35 @@ function init() {
     console.log('🚀 Iniciando Papayas tierlist Rankings');
     console.log('📡 API URL:', API_URL);
     console.log('🔍 Estado del DOM:', document.readyState);
+    
     loadRankings('overall');
     setupModeButtons();
-    // Auto-refresh cada 10 segundos
-    setInterval(() => loadRankings(currentMode), 10000);
+    
+    // Auto-refresh cada 30 segundos (NO cada 10 para evitar loop)
+    // COMENTADO PARA DEBUGGING - Descomentar cuando todo funcione
+    // setInterval(() => loadRankings(currentMode), 30000);
 }
 
-// Cargar rankings al iniciar - compatible con carga tardía
+// Cargar rankings al iniciar
 if (document.readyState === 'loading') {
     console.log('⏳ DOM aún cargando, esperando...');
     document.addEventListener('DOMContentLoaded', init);
 } else {
-    // DOM ya está listo
     console.log('✅ DOM ya listo, ejecutando init()');
     init();
 }
 
 // Configurar botones de modalidad
 function setupModeButtons() {
-    document.querySelectorAll('.mode-btn').forEach(btn => {
+    const buttons = document.querySelectorAll('.mode-btn');
+    if (buttons.length === 0) {
+        console.warn('⚠️ No se encontraron botones de modo');
+        return;
+    }
+    
+    buttons.forEach(btn => {
         btn.addEventListener('click', () => {
-            document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+            buttons.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             currentMode = btn.dataset.mode;
             loadRankings(currentMode);
@@ -57,14 +61,6 @@ async function loadRankings(mode) {
         const data = await response.json();
         console.log('✅ Datos recibidos:', data);
         
-        // Guardar todos los jugadores para el modal
-        allPlayers = {};
-        if (data.players) {
-            data.players.forEach(player => {
-                allPlayers[player.id] = player;
-            });
-        }
-        
         displayRankings(data, mode);
         
     } catch (error) {
@@ -77,7 +73,12 @@ async function loadRankings(mode) {
 function displayRankings(data, mode) {
     const container = document.getElementById('rankings-container');
     
-    if (!data || data.total_players === 0) {
+    if (!container) {
+        console.error('❌ No se encontró #rankings-container');
+        return;
+    }
+    
+    if (!data || !data.players || data.players.length === 0) {
         container.innerHTML = `
             <div class="no-data">
                 <h2>📊 No hay jugadores testeados aún</h2>
@@ -87,19 +88,16 @@ function displayRankings(data, mode) {
         return;
     }
     
-    // Usar la lista de jugadores directamente
-    const allPlayersList = data.players || [];
+    console.log(`📊 Renderizando ${data.players.length} jugadores`);
     
     // Crear lista de jugadores
     let html = '<div class="player-list">';
     
-    allPlayersList.forEach((player, index) => {
+    data.players.forEach((player, index) => {
         const rank = index + 1;
         const skinUrl = getSkinUrl(player.name, player.es_premium);
         const tiersList = getTiersHTML(player.modalidades);
-        
-        // Determinar título basado en puntos
-        let title = getTitleFromPoints(player.points);
+        const title = getTitleFromPoints(player.points);
         
         html += `
             <div class="player-row" onclick="showPlayerModal('${player.id}')">
@@ -120,6 +118,8 @@ function displayRankings(data, mode) {
     
     html += '</div>';
     container.innerHTML = html;
+    
+    console.log('✅ Rankings renderizados correctamente');
 }
 
 // Obtener URL de skin
@@ -141,9 +141,11 @@ function getTitleFromPoints(points) {
     return 'Rookie';
 }
 
-// Crear HTML de tiers con tier exacto (LT3, HT4, etc.)
+// Crear HTML de tiers
 function getTiersHTML(modalidades) {
-    if (!modalidades) return '';
+    if (!modalidades || Object.keys(modalidades).length === 0) {
+        return '<span style="color: #888;">No tested</span>';
+    }
     
     let html = '';
     const modes = ['Mace', 'Sword', 'UHC', 'Crystal', 'NethOP', 'SMP', 'Axe', 'Dpot'];
@@ -151,25 +153,25 @@ function getTiersHTML(modalidades) {
     modes.forEach(mode => {
         if (modalidades[mode]) {
             const modeData = modalidades[mode];
-            const tierExacto = modeData.tier_display || modeData.tier; // LT3, HT4, etc.
-            const tierClass = getTierClassFromName(tierExacto);
+            const tierDisplay = modeData.tier_display || modeData.tier;
+            const tierClass = getTierClassFromName(tierDisplay);
             const emoji = getModeEmoji(mode);
             
             html += `
                 <div class="tier-badge ${tierClass}">
                     <span class="tier-icon">${emoji}</span>
-                    <span>${tierExacto}</span>
+                    <span>${tierDisplay}</span>
                 </div>
             `;
         }
     });
     
-    return html;
+    return html || '<span style="color: #888;">No tested</span>';
 }
 
-// Obtener clase de tier desde nombre exacto (LT3, HT4, etc.)
+// Obtener clase de tier desde nombre
 function getTierClassFromName(tierName) {
-    // Convertir LT3, HT4, etc. a clase CSS
+    if (!tierName) return 'tier-T5';
     if (tierName.includes('1')) return 'tier-T1';
     if (tierName.includes('2')) return 'tier-T2';
     if (tierName.includes('3')) return 'tier-T3';
@@ -209,15 +211,20 @@ async function showPlayerModal(playerId) {
         const modal = document.getElementById('player-modal');
         const modalBody = document.getElementById('modal-body');
         
+        if (!modal || !modalBody) {
+            console.error('❌ Modal elements not found');
+            return;
+        }
+        
         const skinUrl = data.es_premium === 'si' 
             ? `https://mc-heads.net/body/${data.name}`
             : `https://mc-heads.net/body/Steve`;
         const title = getTitleFromPoints(data.puntos_totales);
         
         let tiersHTML = '';
-        if (data.tiers) {
+        if (data.tiers && Object.keys(data.tiers).length > 0) {
             tiersHTML = Object.entries(data.tiers).map(([mode, info]) => {
-                const tierDisplay = info.tier_display || info.tier; // LT3, HT4, etc.
+                const tierDisplay = info.tier_display || info.tier;
                 return `
                 <div class="modal-tier-item">
                     <span class="modal-tier-icon">${getModeEmoji(mode)}</span>
@@ -227,6 +234,8 @@ async function showPlayerModal(playerId) {
                     </div>
                 </div>
             `}).join('');
+        } else {
+            tiersHTML = '<p style="color: #888;">No tested yet</p>';
         }
         
         modalBody.innerHTML = `
@@ -263,12 +272,17 @@ async function showPlayerModal(playerId) {
 
 // Cerrar modal
 function closeModal() {
-    document.getElementById('player-modal').style.display = 'none';
+    const modal = document.getElementById('player-modal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
 }
 
 // Mostrar error
 function showError(errorMsg) {
     const container = document.getElementById('rankings-container');
+    if (!container) return;
+    
     container.innerHTML = `
         <div class="error-message">
             <h2>⚠️ Error al cargar rankings</h2>
