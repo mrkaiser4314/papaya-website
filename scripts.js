@@ -1,5 +1,5 @@
 // Configuración de la API - IMPORTANTE: URL de Railway
-const API_URL = 'https://web-production-8abc3.up.railway.app/api';
+const API_URL = 'https://papayas-api-production.up.railway.app/api';
 
 // NOTA: El dominio de Vercel cambió pero la API sigue en Railway
 // Web: https://mctierz-website-j5ua-3hs63ky54-magisk-mrkaisers-projects.vercel.app/
