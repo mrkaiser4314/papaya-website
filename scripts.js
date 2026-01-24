@@ -40,9 +40,7 @@ function setupSearch() {
 
 // Filtrar jugadores por búsqueda
 function filterPlayers() {
-    if (!allPlayers || allPlayers.length === 0) return;
-    
-    let filtered = allPlayers;
+    let filtered = allPlayers || [];
     
     // Filtrar por búsqueda
     if (searchTerm) {
@@ -64,10 +62,28 @@ function displayFilteredPlayers(players) {
     }
     
     if (!players || players.length === 0) {
+        // Determinar mensaje apropiado
+        let message = '';
+        let subtitle = '';
+        
+        if (searchTerm) {
+            // Búsqueda sin resultados
+            message = '🔍 No se encontraron jugadores';
+            subtitle = `No hay jugadores con el nombre "${searchTerm}"`;
+        } else if (currentMode !== 'overall') {
+            // Modalidad específica sin jugadores
+            message = `📊 No hay jugadores testeados en ${currentMode}`;
+            subtitle = 'Prueba con otra modalidad o espera a que se publiquen resultados';
+        } else {
+            // Sin jugadores en general
+            message = '📊 No hay jugadores testeados aún';
+            subtitle = 'Los rankings aparecerán cuando se publiquen los primeros resultados';
+        }
+        
         container.innerHTML = `
             <div class="no-data">
-                <h2>🔍 No se encontraron jugadores</h2>
-                <p>Intenta con otro nombre</p>
+                <h2>${message}</h2>
+                <p>${subtitle}</p>
             </div>
         `;
         return;
