@@ -265,7 +265,8 @@ async function showPlayerModal(playerId) {
                         </div>
                     </div>
                     <div class="modal-tiers">
-                        <h3>Tiers por Modalidad</h3>
+                        <h3>TIERS</h3>
+                        <div class="modal-tiers-inline">
         `;
         
         if (player.tiers && Object.keys(player.tiers).length > 0) {
@@ -273,10 +274,11 @@ async function showPlayerModal(playerId) {
                 const emoji = getModeEmoji(mode);
                 const tierClass = getTierClassFromName(data.tier);
                 modalHTML += `
-                    <div class="modal-tier-row">
-                        <span class="modal-tier-mode">${emoji} ${mode}</span>
-                        <span class="tier-badge ${tierClass}">${data.tier}</span>
-                        <span class="modal-tier-points">${data.puntos} pts</span>
+                    <div class="modal-tier-badge">
+                        <div class="tier-badge ${tierClass}">
+                            <span class="tier-icon">${emoji}</span>
+                            <span>${data.tier}</span>
+                        </div>
                     </div>
                 `;
             }
@@ -285,6 +287,7 @@ async function showPlayerModal(playerId) {
         }
         
         modalHTML += `
+                        </div>
                     </div>
                 </div>
             </div>
