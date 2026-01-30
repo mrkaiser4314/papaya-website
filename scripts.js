@@ -227,15 +227,15 @@ function getTierClassFromName(tierName) {
 
 // Obtener emoji de modalidad
 function getModeEmoji(mode) {
-    const emojis = {
-        'Mace': '🔨',
-        'Sword': '⚔️',
-        'UHC': '❤️',
-        'Crystal': '💎',
-        'NethOP': '🧪',
-        'SMP': '🪓',
-        'Axe': '🪓',
-        'Dpot': '🧪'
+    const icons = {
+        'Mace': 'https://mctiers.com/tier_icons/mace.svg',
+        'Sword': 'https://mctiers.com/tier_icons/sword.svg',
+        'UHC': 'https://mctiers.com/tier_icons/uhc.svg',
+        'Crystal': 'https://mctiers.com/tier_icons/vanilla.svg',
+        'NethOP': 'https://mctiers.com/tier_icons/nethop.svg',
+        'SMP': 'https://mctiers.com/tier_icons/smp.svg',
+        'Axe': 'https://mctiers.com/tier_icons/axe.svg',
+        'Dpot': 'https://mctiers.com/tier_icons/pot.svg'
     };
     return emojis[mode] || '🎮';
 }
