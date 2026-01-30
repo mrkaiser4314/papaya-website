@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCTiers - Rankings</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>MCTIERS</h1>
+            </div>
+            <nav>
+                <a href="#" class="nav-link">
+                    <span>🏠</span> Home
+                </a>
+                <a href="#" class="nav-link active">
+                    <span>🏆</span> Rankings
+                </a>
+                <a href="https://discord.gg/5x8fb4Dhqn" target="_blank" class="nav-link">
+                    <span>💬</span> Discords
+                </a>
+                <a href="#" class="nav-link">
+                    <span>📚</span> API Docs
+                </a>
+            </nav>
+            <div class="search-box">
+                <input type="text" placeholder="Search player..." id="search-input">
+            </div>
+        </div>
+    </header>
+
+    <!-- Mode Selection -->
+    <div class="modes-container">
+        <div class="container">
+            <div class="modes-grid">
+                <button class="mode-btn active" data-mode="overall">
+                    <span class="mode-emoji">🏆</span>
+                    <span class="mode-name">Overall</span>
+                </button>
+                <button class="mode-btn" data-mode="Mace">
+                    <span class="mode-emoji">🔨</span>
+                    <span class="mode-name">Mace</span>
+                </button>
+                <button class="mode-btn" data-mode="Sword">
+                    <span class="mode-emoji">⚔️</span>
+                    <span class="mode-name">Sword</span>
+                </button>
+                <button class="mode-btn" data-mode="UHC">
+                    <span class="mode-emoji">❤️</span>
+                    <span class="mode-name">UHC</span>
+                </button>
+                <button class="mode-btn" data-mode="Crystal">
+                    <span class="mode-emoji">💎</span>
+                    <span class="mode-name">Crystal</span>
+                </button>
+                <button class="mode-btn" data-mode="NethOP">
+                    <span class="mode-emoji">🧪</span>
+                    <span class="mode-name">NethOP</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rankings Container -->
+    <div class="container">
+        <div id="rankings-container"></div>
+    </div>
+
+    <!-- Player Modal -->
+    <div id="player-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
