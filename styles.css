@@ -243,9 +243,10 @@ nav {
 
 .tier-badge .tier-icon {
     position: absolute;
-    top: -5px;
-    left: -5px;
-    font-size: 16px;
+    top: -6px;
+    left: -6px;
+    width: 16px;
+    height: 16px;
 }
 
 /* Tier colors - Updated to match tier names */
