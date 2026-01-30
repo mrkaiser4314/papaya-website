@@ -1,4 +1,4 @@
-* {
+{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -101,11 +101,18 @@ nav {
 }
 
 .mode-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 15px 25px;
+    color: #a0aec0;
+    cursor: pointer;
+    transition: all 0.3s;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* 👈 ESTO ES LA CLAVE */
-    gap: 6px;
+    gap: 5px;
+    min-width: 100px;
 }
 
 .mode-btn:hover {
@@ -234,14 +241,11 @@ nav {
     position: relative;
 }
 
-/* SVG icons inside tier badges */
-.tier-icon img,
-.mode-btn img.mode-icon {
-    width: 26px;
-    height: 26px;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto; /* 👈 CENTRADO TOTAL */
+.tier-badge .tier-icon {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    font-size: 16px;
 }
 
 /* Tier colors - Updated to match tier names */
