@@ -237,9 +237,12 @@ function getModeEmoji(mode) {
         'Axe': 'https://mctiers.com/tier_icons/axe.svg',
         'Dpot': 'https://mctiers.com/tier_icons/pot.svg'
     };
-    return emojis[mode] || '🎮';
-}
 
+    if (!icons[mode]) return '';
+
+    return `<img src="${icons[mode]}" alt="${mode}" class="mode-icon">`;
+}
+ 
 // Mostrar modal de jugador
 async function showPlayerModal(playerId) {
     try {
