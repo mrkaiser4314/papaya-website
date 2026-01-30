@@ -104,7 +104,7 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; 
+    justify-content: center; /* 👈 ESTO ES LA CLAVE */
     gap: 6px;
 }
 
@@ -236,12 +236,13 @@ nav {
 
 /* SVG icons inside tier badges */
 .tier-icon img,
-.mode-icon {
-    width: 16px;
-    height: 16px;
+.mode-btn img.mode-icon {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
     display: block;
+    margin: 0 auto; /* 👈 CENTRADO TOTAL */
 }
-
 
 /* Tier colors - Updated to match tier names */
 .tier-T1, .tier-HT1, .tier-LT1 { background: #ff4444; }
