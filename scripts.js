@@ -1,5 +1,5 @@
 // Configuración de la API
-const API_URL = 'https://web-production-8abc3.up.railway.app/api';
+const API_URL = 'https://papayas-api-production.up.railway.app/api';
 
 let currentMode = 'overall';
 let allPlayers = {};
