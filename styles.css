@@ -367,18 +367,9 @@ nav {
     align-items: center;
 }
 
-.modal-tier-badge .tier-badge {
-    width: 60px;
-    height: 60px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    font-size: 11px;
-    font-weight: bold;
-    gap: 2px;
-    position: relative;
+.modal-tier-badge .tier-icon img {
+    width: 20px;
+    height: 20px;
 }
 
 .modal-tier-badge .tier-badge .tier-icon {
