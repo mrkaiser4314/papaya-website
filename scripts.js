@@ -11,7 +11,7 @@ const MODE_ICONS = {
     'Mace': 'https://mctiers.com/tier_icons/mace.svg',
     'Sword': 'https://mctiers.com/tier_icons/sword.svg',
     'UHC': 'https://mctiers.com/tier_icons/uhc.svg',
-    'Crystal': 'https://mctiers.com/tier_icons/uhc.svg',
+    'Crystal': 'https://mctiers.com/tier_icons/vanilla.svg',
     'NethOP': 'https://mctiers.com/tier_icons/nethop.svg',
     'SMP': 'https://mctiers.com/tier_icons/smp.svg',
     'Axe': 'https://mctiers.com/tier_icons/axe.svg',
