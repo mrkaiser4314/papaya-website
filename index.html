@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papayas tierlist - Rankings</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>PAPAYAS TIERLIST</h1>
+            </div>
+            <nav>
+                <a href="#" class="nav-link">
+                    <span>🏠</span> Home
+                </a>
+                <a href="#" class="nav-link active">
+                    <span>🏆</span> Rankings
+                </a>
+                <a href="https://discord.gg/5x8fb4Dhqn" target="_blank" class="nav-link">
+                    <span>💬</span> Discord
+                </a>
+                <a href="#" class="nav-link">
+                    <span>📚</span> API Docs
+                </a>
+            </nav>
+            <div class="search-box">
+                <input type="text" placeholder="Search player..." id="search-input">
+            </div>
+        </div>
+    </header>
+
+    <!-- Mode Selection -->
+    <div class="modes-container">
+        <div class="container">
+            <div class="modes-grid">
+                <button class="mode-btn active" data-mode="overall">
+                    <img src="https://mctiers.com/tier_icons/overall.svg" alt="Overall" class="mode-icon">
+                    <span class="mode-name">Overall</span>
+                </button>
+                <button class="mode-btn" data-mode="Mace">
+                    <img src="https://mctiers.com/tier_icons/mace.svg" alt="Mace" class="mode-icon">
+                    <span class="mode-name">Mace</span>
+                </button>
+                <button class="mode-btn" data-mode="Sword">
+                    <img src="https://mctiers.com/tier_icons/sword.svg" alt="Sword" class="mode-icon">
+                    <span class="mode-name">Sword</span>
+                </button>
+                <button class="mode-btn" data-mode="UHC">
+                    <img src="https://mctiers.com/tier_icons/uhc.svg" alt="UHC" class="mode-icon">
+                    <span class="mode-name">UHC</span>
+                </button>
+                <button class="mode-btn" data-mode="Crystal">
+                    <img src="https://mctiers.com/tier_icons/uhc.svg" alt="Crystal" class="mode-icon">
+                    <span class="mode-name">Crystal</span>
+                </button>
+                <button class="mode-btn" data-mode="NethOP">
+                    <img src="https://mctiers.com/tier_icons/nethop.svg" alt="NethOP" class="mode-icon">
+                    <span class="mode-name">NethOP</span>
+                </button>
+                <button class="mode-btn" data-mode="SMP">
+                    <img src="https://mctiers.com/tier_icons/smp.svg" alt="SMP" class="mode-icon">
+                    <span class="mode-name">SMP</span>
+                </button>
+                <button class="mode-btn" data-mode="Axe">
+                    <img src="https://mctiers.com/tier_icons/axe.svg" alt="Axe" class="mode-icon">
+                    <span class="mode-name">Axe</span>
+                </button>
+                <button class="mode-btn" data-mode="Dpot">
+                    <img src="https://mctiers.com/tier_icons/pot.svg" alt="Dpot" class="mode-icon">
+                    <span class="mode-name">Dpot</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rankings Container -->
+    <div class="container">
+        <div id="rankings-container"></div>
+    </div>
+
+    <!-- Player Modal -->
+    <div id="player-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
