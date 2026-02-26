@@ -1,5 +1,5 @@
 // Configuración de la API
-const API_URL = 'https://bot-waitlist-papayas-1.onrender.com/api';
+const API_URL = 'https://srv-d6fuq7tm5p6s73922fb0/api';
 
 let currentMode = 'overall';
 let allPlayers = [];
