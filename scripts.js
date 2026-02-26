@@ -1,5 +1,5 @@
 // Configuración de la API
-const API_URL = 'https://papayas-api-production.up.railway.app/api';
+const API_URL = 'https://bot-waitlist-papayas-1.onrender.com/api';
 
 let currentMode = 'overall';
 let allPlayers = [];
